@@ -27,6 +27,10 @@ module Bretels
       copy_file 'factories_spec.rb', 'spec/models/factories_spec.rb'
     end
 
+    def generate_factories_file
+      template 'factories.rb', 'spec/factories.rb'
+    end
+
     def configure_smtp
       config = <<-RUBY
 
@@ -52,14 +56,24 @@ module Bretels
       )
     end
 
+    def enable_force_ssl
+      replace_in_file 'config/environments/production.rb',
+        '# config.force_ssl = true', 'config.force_ssl = true'
+    end
+
     def setup_staging_environment
-      run 'cp config/environments/production.rb config/environments/staging.rb'
+      template 'staging.rb.erb', 'config/environments/staging.rb'
     end
 
     def initialize_on_precompile
       inject_into_file 'config/application.rb',
         "\n    config.assets.initialize_on_precompile = false",
         :after => 'config.assets.enabled = true'
+    end
+
+    def lib_in_load_path
+      replace_in_file 'config/application.rb',
+        '# config.autoload_paths += %W(#{config.root}/extras)', 'config.autoload_paths += Dir["#{config.root}/lib/**/"]'
     end
 
     def create_partials_directory
@@ -85,10 +99,6 @@ module Bretels
         :force => true
     end
 
-    def create_database
-      bundle_command 'exec rake db:create'
-    end
-
     def replace_gemfile
       remove_file 'Gemfile'
       copy_file 'Gemfile_clean', 'Gemfile'
@@ -108,6 +118,7 @@ module Bretels
       copy_file 'rspec', '.rspec'
 
       config = <<-RUBY
+
     config.generators do |generate|
       generate.test_framework :rspec
       generate.helper false

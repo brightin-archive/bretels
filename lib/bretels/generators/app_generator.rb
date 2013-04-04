@@ -48,7 +48,8 @@ module Bretels
     def setup_development_environment
       say 'Setting up the development environment'
       build :raise_delivery_errors
-      build :provide_setup_script
+      build :initialize_on_precompile
+      build :lib_in_load_path
     end
 
     def setup_test_environment
@@ -58,17 +59,18 @@ module Bretels
       build :generate_rspec
       build :configure_rspec
       build :enable_database_cleaner
+      build :generate_factories_file
     end
 
     def setup_production_environment
       say 'Setting up the production environment'
       build :configure_smtp
+      build :enable_force_ssl
     end
 
     def setup_staging_environment
       say 'Setting up the staging environment'
       build :setup_staging_environment
-      build :initialize_on_precompile
     end
 
     def create_suspenders_views
@@ -82,7 +84,6 @@ module Bretels
     def customize_gemfile
       build :replace_gemfile
       build :set_ruby_to_version_being_used
-      bundle_command 'install'
     end
 
     def setup_database
@@ -91,8 +92,6 @@ module Bretels
       if 'postgresql' == options[:database]
         build :use_postgres_config_template
       end
-
-      build :create_database
     end
 
     def configure_app
@@ -159,6 +158,9 @@ module Bretels
 
     def outro
       say 'Done. Congratulations!'
+      say '1. Run bundle install'
+      say '2. Run rake db:create'
+      say "3. Run exceptional install <api-key>"
     end
 
     def run_bundle
