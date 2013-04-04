@@ -1,0 +1,15 @@
+/.bundle
+/db/*.sqlite3
+/log/*.log
+/tmp
+.sass-cache
+!.keep
+*.DS_Store
+*.swp
+.env
+bin/stubs
+coverage/*
+public/system
+rerun.txt
+tags
+vendor/bundler_gems
