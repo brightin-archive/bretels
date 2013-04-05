@@ -38,8 +38,8 @@ module Bretels
   # config.action_controller.asset_host = ENV['ASSET_HOST']
       RUBY
 
-      inject_into_file 'config/environment.rb', "use Rack::Deflater\n",
-        :before => "# Initialize the rails application"
+      inject_into_file 'config.ru', "use Rack::Deflater\n",
+        :before => "run #{app_const}"
 
       inject_into_file 'config/environments/production.rb', config.rstrip,
         :after => "config.assets.digest = true"
