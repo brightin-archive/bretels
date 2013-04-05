@@ -66,6 +66,7 @@ module Bretels
       say 'Setting up the production environment'
       build :configure_smtp
       build :enable_force_ssl
+      build :add_cdn_settings
     end
 
     def setup_staging_environment

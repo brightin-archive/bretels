@@ -31,10 +31,23 @@ module Bretels
       template 'factories.rb', 'spec/factories.rb'
     end
 
+    def add_cdn_settings
+      config = <<-RUBY
+\n\n  # Cloudfront settings
+  # config.static_cache_control = "public, max-age=31536000"
+  # config.action_controller.asset_host = ENV['ASSET_HOST']
+      RUBY
+
+      inject_into_file 'config/environment.rb', "use Rack::Deflater\n",
+        :before => "# Initialize the rails application"
+
+      inject_into_file 'config/environments/production.rb', config.rstrip,
+        :after => "config.assets.digest = true"
+    end
+
     def configure_smtp
       config = <<-RUBY
-
-  ActionMailer::Base.smtp_settings = {
+\n\n  ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
     :authentication => :plain,
@@ -46,7 +59,7 @@ module Bretels
   config.action_mailer.delivery_method = :smtp
       RUBY
 
-      inject_into_file 'config/environments/production.rb', config,
+      inject_into_file 'config/environments/production.rb', config.rstrip,
         :after => 'config.action_mailer.raise_delivery_errors = false'
 
       inject_into_file(
@@ -119,6 +132,7 @@ module Bretels
 
       config = <<-RUBY
 
+    # Hand-pick the generators we use
     config.generators do |generate|
       generate.test_framework :rspec
       generate.helper false
@@ -202,6 +216,8 @@ module Bretels
 
     def init_git
       run 'git init'
+      run 'git add .'
+      run 'git commit -m "Initial commit" > /dev/null'
     end
 
     def create_heroku_apps
