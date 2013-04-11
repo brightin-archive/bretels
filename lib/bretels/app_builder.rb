@@ -262,6 +262,10 @@ module Bretels
       copy_file 'disable_xml_params.rb', 'config/initializers/disable_xml_params.rb'
     end
 
+    def setup_robots_file
+      copy_file 'robots.txt.erb', 'app/assets/misc/robots.txt.erb'
+    end
+
     def setup_default_rake_task
       append_file 'Rakefile' do
         "task(:default).clear\ntask :default => [:spec]"
