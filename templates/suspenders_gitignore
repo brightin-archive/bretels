@@ -7,7 +7,6 @@
 *.DS_Store
 *.swp
 .env
-bin/stubs
 coverage/*
 public/system
 rerun.txt
