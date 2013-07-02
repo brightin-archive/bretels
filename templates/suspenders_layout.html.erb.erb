@@ -6,10 +6,11 @@
   <meta name="robots" content="noopd" />
   <title><%%= page_title %></title>
   <%%= stylesheet_link_tag :application, :media => 'all' %>
+  <%%= javascript_include_tag :application %>
   <%%= csrf_meta_tags %>
 </head>
 
-<body class="<%%= body_class %>">
+<body>
   <%%= render 'flashes' %>
   <%%= yield %>
   <%%= render 'javascript' %>

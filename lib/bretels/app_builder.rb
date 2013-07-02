@@ -85,8 +85,8 @@ module Bretels
     end
 
     def lib_in_load_path
-      replace_in_file 'config/application.rb',
-        '# config.autoload_paths += %W(#{config.root}/extras)', 'config.autoload_paths += Dir["#{config.root}/lib/**/"]'
+      inject_into_file 'config/application.rb', "\n\n" + '    config.autoload_paths += Dir["#{config.root}/lib/**/"]',
+        after: /class Application < Rails::Application/
     end
 
     def create_partials_directory
@@ -127,9 +127,6 @@ module Bretels
     end
 
     def configure_rspec
-      remove_file '.rspec'
-      copy_file 'rspec', '.rspec'
-
       config = <<-RUBY
 
     # Hand-pick the generators we use
@@ -146,12 +143,6 @@ module Bretels
       RUBY
 
       inject_into_class 'config/application.rb', 'Application', config
-    end
-
-    def blacklist_active_record_attributes
-      replace_in_file 'config/application.rb',
-        'config.active_record.whitelist_attributes = true',
-        'config.active_record.whitelist_attributes = false'
     end
 
     def configure_strong_parameters
@@ -189,7 +180,6 @@ module Bretels
     end
 
     def setup_foreman
-      copy_file 'sample.env', '.sample.env'
       copy_file 'unicorn.rb', 'config/unicorn.rb'
       copy_file 'Procfile', 'Procfile'
     end
@@ -208,7 +198,8 @@ module Bretels
         'spec/features',
         'spec/models',
       ].each do |dir|
-        empty_directory_with_gitkeep dir
+        empty_directory(dir)
+        create_file("#{dir}/.gitkeep")
       end
     end
 

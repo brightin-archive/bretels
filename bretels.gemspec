@@ -26,7 +26,7 @@ Fork of thoughtbot's Suspenders for use at Brightin.
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.md LICENSE]
 
-  s.add_dependency 'rails', '3.2.12'
+  s.add_dependency 'rails', '4.0.0'
   s.add_dependency 'bundler', '>= 1.1'
   s.add_dependency 'hub', '~> 1.10.2'
 end

@@ -98,7 +98,6 @@ module Bretels
     def configure_app
       say 'Configuring app'
       build :configure_action_mailer
-      build :blacklist_active_record_attributes
       build :configure_strong_parameters
       build :configure_time_zone
       build :configure_time_formats
