@@ -259,5 +259,14 @@ module Bretels
       end
     end
 
+    def raise_unpermitted_params
+      config = <<-RUBY
+\n\n  config.action_controller.action_on_unpermitted_parameter = :raise
+      RUBY
+
+      inject_into_file 'config/environments/development.rb', config.rstrip,
+        :after => "config.assets.debug = true"
+    end
+
   end
 end
