@@ -261,7 +261,7 @@ module Bretels
 
     def raise_unpermitted_params
       config = <<-RUBY
-\n\n  config.action_controller.action_on_unpermitted_parameter = :raise
+\n\n  config.action_controller.action_on_unpermitted_parameters = :raise
       RUBY
 
       inject_into_file 'config/environments/development.rb', config.rstrip,
