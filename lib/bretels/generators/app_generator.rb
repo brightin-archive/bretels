@@ -99,6 +99,7 @@ module Bretels
       say 'Configuring app'
       build :configure_action_mailer
       build :configure_strong_parameters
+      build :raise_unpermitted_params
       build :configure_time_zone
       build :configure_time_formats
       build :configure_dutch_language
