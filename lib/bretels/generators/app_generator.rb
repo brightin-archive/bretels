@@ -105,6 +105,7 @@ module Bretels
       build :configure_dutch_language
       build :configure_rack_timeout
       build :disable_xml_params
+      build :add_airbrake_configuration
       build :add_email_validator
       build :setup_default_rake_task
       build :setup_foreman
@@ -161,7 +162,7 @@ module Bretels
       say 'Done. Congratulations!'
       say '1. Run bundle install'
       say '2. Run rake db:create'
-      say "3. Run exceptional install <api-key>"
+      say "3. Update config/initializers/airbrake.rb"
     end
 
     def run_bundle
