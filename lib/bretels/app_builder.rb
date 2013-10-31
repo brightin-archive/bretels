@@ -253,6 +253,10 @@ module Bretels
       copy_file 'disable_xml_params.rb', 'config/initializers/disable_xml_params.rb'
     end
 
+    def add_airbrake_configuration
+      copy_file 'airbrake.rb', 'config/initializers/airbrake.rb'
+    end
+
     def setup_default_rake_task
       append_file 'Rakefile' do
         "task(:default).clear\ntask :default => [:spec]"
