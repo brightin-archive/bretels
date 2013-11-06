@@ -9,6 +9,7 @@ gem 'rails-i18n'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'unicorn'
+gem 'airbrake'
 
 group :development do
   gem 'foreman'
@@ -31,6 +32,5 @@ end
 
 group :staging, :production do
   gem 'rails_12factor'
-  gem 'airbrake'
   gem 'newrelic_rpm'
 end
