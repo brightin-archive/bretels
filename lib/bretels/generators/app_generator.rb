@@ -71,7 +71,6 @@ module Bretels
       say 'Creating suspenders views'
       build :create_partials_directory
       build :create_shared_flashes
-      build :create_shared_javascripts
       build :create_application_layout
     end
 
