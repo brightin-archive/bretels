@@ -65,6 +65,23 @@ module Bretels
       )
     end
 
+    def enable_rack_deflater
+      config = <<-RUBY
+
+  # Enable deflate / gzip compression of controller-generated responses
+  config.middleware.use Rack::Deflater
+      RUBY
+
+      inject_into_file 'config/environments/production.rb', config,
+        :after => "config.serve_static_assets = false\n"
+    end
+
+    def remove_turbolinks
+      replace_in_file 'app/assets/javascripts/application.js',
+        /\/\/= require turbolinks\n/,
+        ''
+    end
+
     def enable_force_ssl
       replace_in_file 'config/environments/production.rb',
         '# config.force_ssl = true', 'config.force_ssl = true'
@@ -155,6 +172,7 @@ module Bretels
     def configure_action_mailer
       action_mailer_host 'development', "#{app_name}.dev"
       action_mailer_host 'test', 'www.example.com'
+      action_mailer_host 'staging', "#{app_name}-staging.herokuapp.com"
       action_mailer_host 'production', "#{app_name}.nl"
     end
 

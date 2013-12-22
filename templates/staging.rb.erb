@@ -1,6 +1,5 @@
 load "config/environments/production.rb"
 
 <%=app_const%>.configure do
-  config.action_mailer.default_url_options = { host: 'REPLACE_WITH_STAGING_URL' }
-  Mail.register_interceptor RecipientInterceptor.new('REPLACE_WITH_EMAIL')
+  Mail.register_interceptor RecipientInterceptor.new(ENV['EMAIL_RECEIVERS'])
 end
