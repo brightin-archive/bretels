@@ -202,10 +202,6 @@ module Bretels
       run "#{path_addition} heroku config:add RACK_ENV=staging RAILS_ENV=staging --remote=staging"
     end
 
-    def create_github_repo(repo_name)
-      run "#{path_addition} hub create #{repo_name}"
-    end
-
     def customize_error_pages
       meta_tags =<<-EOS
   <meta charset='utf-8' />

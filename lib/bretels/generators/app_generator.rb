@@ -9,9 +9,6 @@ module Bretels
     class_option :heroku, :type => :boolean, :aliases => '-H', :default => false,
       :desc => 'Create staging and production Heroku apps'
 
-    class_option :github, :type => :string, :aliases => '-G', :default => nil,
-      :desc => 'Create Github repository and add remote origin pointed to repo'
-
     class_option :skip_test_unit, :type => :boolean, :aliases => '-T', :default => true,
       :desc => 'Skip Test::Unit files'
 
@@ -35,7 +32,6 @@ module Bretels
       invoke :remove_routes_comment_lines
       invoke :setup_git
       invoke :create_heroku_apps
-      invoke :create_github_repo
       invoke :outro
     end
 
@@ -121,13 +117,6 @@ module Bretels
       if options[:heroku]
         say 'Creating Heroku apps'
         build :create_heroku_apps
-      end
-    end
-
-    def create_github_repo
-      if options[:github]
-        say 'Creating Github repo'
-        build :create_github_repo, options[:github]
       end
     end
 
