@@ -13,11 +13,11 @@ module Bretels
       :desc => 'Skip Test::Unit files'
 
     def finish_template
-      invoke :suspenders_customization
+      invoke :bretels_customization
       super
     end
 
-    def suspenders_customization
+    def bretels_customization
       invoke :remove_files_we_dont_need
       invoke :customize_gemfile
       invoke :setup_development_environment
@@ -30,6 +30,7 @@ module Bretels
       invoke :setup_stylesheets
       invoke :customize_error_pages
       invoke :remove_routes_comment_lines
+      invoke :remove_turbolinks
       invoke :setup_git
       invoke :create_heroku_apps
       invoke :outro
@@ -60,6 +61,7 @@ module Bretels
       build :configure_smtp
       build :enable_force_ssl
       build :add_cdn_settings
+      build :enable_rack_deflater
     end
 
     def setup_staging_environment
@@ -107,7 +109,7 @@ module Bretels
     end
 
     def setup_git
-      say 'Initializing git'
+      say 'initializing git'
       invoke :setup_gitignore
       invoke :init_git
     end
@@ -130,6 +132,10 @@ module Bretels
     def customize_error_pages
       say 'Customizing the 500/404/422 pages'
       build :customize_error_pages
+    end
+
+    def remove_turbolinks
+      build :remove_turbolinks
     end
 
     def remove_routes_comment_lines
