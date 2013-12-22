@@ -3,7 +3,6 @@ PATH
   specs:
     bretels (1.0.2)
       bundler (>= 1.1)
-      hub (~> 1.10.2)
       rails (= 4.0.0)
 
 GEM
@@ -38,7 +37,6 @@ GEM
     builder (3.1.4)
     erubis (2.7.0)
     hike (1.2.3)
-    hub (1.10.4)
     i18n (0.6.9)
     mail (2.5.4)
       mime-types (~> 1.16)
