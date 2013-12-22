@@ -2,9 +2,6 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
-require 'capybara/rspec'
-
-Capybara.javascript_driver = :webkit
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -13,4 +10,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
 end

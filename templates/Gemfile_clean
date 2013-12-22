@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+ruby '2.0.0'
+
+gem 'rails', '~> 4.0.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'pg'
@@ -8,15 +10,13 @@ gem 'rack-timeout'
 gem 'rails-i18n'
 gem 'sass-rails'
 gem 'uglifier'
-gem 'unicorn'
 gem 'airbrake'
 
 group :development do
-  gem 'foreman'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'quiet_assets'
   gem 'letter_opener'
+  gem 'quiet_assets'
 end
 
 group :development, :test do
@@ -25,12 +25,11 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara-webkit', '>= 0.14.1'
-  gem 'database_cleaner'
   gem 'launchy'
 end
 
 group :staging, :production do
-  gem 'rails_12factor'
   gem 'newrelic_rpm'
+  gem 'rails_12factor'
+  gem 'unicorn'
 end

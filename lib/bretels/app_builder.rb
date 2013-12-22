@@ -6,10 +6,6 @@ module Bretels
       template 'README.md.erb', 'README.md'
     end
 
-    def remove_public_index
-      remove_file 'public/index.html'
-    end
-
     def remove_rails_logo_image
       remove_file 'app/assets/images/rails.png'
     end
@@ -28,7 +24,7 @@ module Bretels
     end
 
     def generate_factories_file
-      template 'factories.rb', 'spec/factories.rb'
+      empty_directory 'spec/factories'
     end
 
     def add_cdn_settings
@@ -122,10 +118,6 @@ module Bretels
         after: /source 'https:\/\/rubygems.org'/
     end
 
-    def enable_database_cleaner
-      copy_file 'database_cleaner_rspec.rb', 'spec/support/database_cleaner.rb'
-    end
-
     def configure_rspec
       config = <<-RUBY
 
@@ -139,14 +131,9 @@ module Bretels
       generate.routing_specs false
       generate.view_specs false
     end
-
       RUBY
 
       inject_into_class 'config/application.rb', 'Application', config
-    end
-
-    def configure_strong_parameters
-      copy_file 'strong_parameters.rb', 'config/initializers/strong_parameters.rb'
     end
 
     def configure_time_zone
@@ -219,10 +206,6 @@ module Bretels
       run "#{path_addition} hub create #{repo_name}"
     end
 
-    def copy_miscellaneous_files
-      copy_file 'errors.rb', 'config/initializers/errors.rb'
-    end
-
     def customize_error_pages
       meta_tags =<<-EOS
   <meta charset='utf-8' />
@@ -247,10 +230,6 @@ module Bretels
 
     def add_email_validator
       copy_file 'email_validator.rb', 'app/validators/email_validator.rb'
-    end
-
-    def disable_xml_params
-      copy_file 'disable_xml_params.rb', 'config/initializers/disable_xml_params.rb'
     end
 
     def add_airbrake_configuration

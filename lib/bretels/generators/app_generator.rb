@@ -31,7 +31,6 @@ module Bretels
       invoke :setup_database
       invoke :configure_app
       invoke :setup_stylesheets
-      invoke :copy_miscellaneous_files
       invoke :customize_error_pages
       invoke :remove_routes_comment_lines
       invoke :setup_git
@@ -41,7 +40,6 @@ module Bretels
     end
 
     def remove_files_we_dont_need
-      build :remove_public_index
       build :remove_rails_logo_image
     end
 
@@ -58,7 +56,6 @@ module Bretels
       build :test_factories_first
       build :generate_rspec
       build :configure_rspec
-      build :enable_database_cleaner
       build :generate_factories_file
     end
 
@@ -98,13 +95,11 @@ module Bretels
     def configure_app
       say 'Configuring app'
       build :configure_action_mailer
-      build :configure_strong_parameters
       build :raise_unpermitted_params
       build :configure_time_zone
       build :configure_time_formats
       build :configure_dutch_language
       build :configure_rack_timeout
-      build :disable_xml_params
       build :add_airbrake_configuration
       build :add_email_validator
       build :setup_default_rake_task
@@ -142,11 +137,6 @@ module Bretels
 
     def init_git
       build :init_git
-    end
-
-    def copy_miscellaneous_files
-      say 'Copying miscellaneous support files'
-      build :copy_miscellaneous_files
     end
 
     def customize_error_pages
