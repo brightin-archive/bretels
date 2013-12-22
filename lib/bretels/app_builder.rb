@@ -196,7 +196,6 @@ module Bretels
       [
         'spec/support',
         'spec/lib',
-        'spec/features',
         'spec/models',
       ].each do |dir|
         empty_directory(dir)
