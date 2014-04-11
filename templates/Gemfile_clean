@@ -1,22 +1,24 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.1'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'pg'
 gem 'rack-timeout'
 gem 'rails-i18n'
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier'
 gem 'airbrake'
 
 group :development do
+  gem 'spring-commands-rspec'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'quiet_assets'
+  gem 'spring'
 end
 
 group :staging do
