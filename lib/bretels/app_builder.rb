@@ -27,6 +27,10 @@ module Bretels
       empty_directory 'spec/factories'
     end
 
+    def install_spring_gem
+      `gem install spring spring-commands-rspec`
+    end
+
     def add_cdn_settings
       config = <<-RUBY
 \n\n  # Cloudfront settings
@@ -233,8 +237,8 @@ module Bretels
 
     def remove_routes_comment_lines
       replace_in_file 'config/routes.rb',
-        /Application\.routes\.draw do.*end/m,
-        "Application.routes.draw do\nend"
+        /Rails\.application\.routes\.draw do.*end/m,
+        "Rails.application.routes.draw do\nend"
     end
 
     def add_email_validator

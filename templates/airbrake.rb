@@ -1,3 +1,6 @@
+require 'rake'
+require 'airbrake/rake_handler'
+
 Airbrake.configure do |config|
   config.api_key = ''
   config.host    = ''

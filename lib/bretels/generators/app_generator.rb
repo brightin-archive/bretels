@@ -45,6 +45,7 @@ module Bretels
       build :raise_delivery_errors
       build :initialize_on_precompile
       build :lib_in_load_path
+      build :install_spring_gem
     end
 
     def setup_test_environment
