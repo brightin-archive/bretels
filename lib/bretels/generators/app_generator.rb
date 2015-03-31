@@ -69,7 +69,7 @@ module Bretels
     end
 
     def create_suspenders_views
-      say 'Creating suspenders views'
+      say 'Creating bretel views'
       build :create_partials_directory
       build :create_shared_flashes
       build :create_application_layout
