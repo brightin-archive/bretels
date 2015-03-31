@@ -2,13 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'validate FactoryGirl factories' do
   FactoryGirl.factories.each do |factory|
-    context "with factory for :#{factory.name}" do
-      subject { FactoryGirl.build(factory.name) }
-
-      it 'is valid' do
-        is_valid = subject.valid?
-        expect(is_valid).to be_true, subject.errors.full_messages.join(',')
-      end
+    it "#{factory.name} should be valid" do
+      expect(build(factory.name)).to be_valid
     end
   end
 end
