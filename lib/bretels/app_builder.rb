@@ -241,10 +241,6 @@ module Bretels
         "Rails.application.routes.draw do\nend"
     end
 
-    def add_email_validator
-      copy_file 'email_validator.rb', 'app/validators/email_validator.rb'
-    end
-
     def add_airbrake_configuration
       copy_file 'airbrake.rb', 'config/initializers/airbrake.rb'
     end

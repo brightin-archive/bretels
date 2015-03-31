@@ -99,7 +99,6 @@ module Bretels
       build :configure_dutch_language
       build :configure_rack_timeout
       build :add_airbrake_configuration
-      build :add_email_validator
       build :setup_default_rake_task
       build :setup_foreman
     end
