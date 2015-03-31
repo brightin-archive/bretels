@@ -15,8 +15,10 @@ module Bretels
         'raise_delivery_errors = false', 'raise_delivery_errors = true'
     end
 
-    def enable_factory_girl_syntax
+    def add_support_files
       copy_file 'factory_girl_syntax_rspec.rb', 'spec/support/factory_girl.rb'
+      copy_file 'database_cleaner.rb', 'spec/support/database_cleaner.rb'
+      copy_file 'poltergeist.rb', 'spec/support/poltergeist.rb'
     end
 
     def test_factories_first

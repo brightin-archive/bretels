@@ -50,7 +50,7 @@ module Bretels
 
     def setup_test_environment
       say 'Setting up the test environment'
-      build :enable_factory_girl_syntax
+      build :add_support_files
       build :test_factories_first
       build :generate_rspec
       build :configure_rspec
