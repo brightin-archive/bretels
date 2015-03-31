@@ -158,6 +158,7 @@ module Bretels
 
     def generate_rspec
       copy_file 'spec_helper.rb', 'spec/spec_helper.rb'
+      copy_file 'rails_helper.rb', 'spec/rails_helper.rb'
     end
 
     def setup_foreman
@@ -174,9 +175,9 @@ module Bretels
     def gitignore_files
       concat_file 'suspenders_gitignore', '.gitignore'
       [
-        'spec/support',
-        'spec/lib',
+        'spec/features',
         'spec/models',
+        'spec/support'
       ].each do |dir|
         empty_directory(dir)
         create_file("#{dir}/.gitkeep")
