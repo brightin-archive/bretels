@@ -162,7 +162,7 @@ module Bretels
     end
 
     def setup_foreman
-      copy_file 'unicorn.rb', 'config/unicorn.rb'
+      copy_file 'puma.rb', 'config/puma.rb'
       copy_file 'Procfile', 'Procfile'
     end
 
