@@ -198,22 +198,6 @@ module Bretels
       run "#{path_addition} heroku config:add RACK_ENV=staging RAILS_ENV=staging --remote=staging"
     end
 
-    def customize_error_pages
-      meta_tags =<<-EOS
-  <meta charset='utf-8' />
-  <meta name='robots' content='noodp' />
-      EOS
-      style_tags =<<-EOS
-<link href='/assets/application.css' media='all' rel='stylesheet' type='text/css' />
-      EOS
-
-      %w(500 404 422).each do |page|
-        inject_into_file "public/#{page}.html", meta_tags, :after => "<head>\n"
-        replace_in_file "public/#{page}.html", /<style.+>.+<\/style>/mi, style_tags.strip
-        replace_in_file "public/#{page}.html", /<!--.+-->\n/, ''
-      end
-    end
-
     def remove_routes_comment_lines
       replace_in_file 'config/routes.rb',
         /Rails\.application\.routes\.draw do.*end/m,

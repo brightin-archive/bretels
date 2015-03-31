@@ -28,7 +28,6 @@ module Bretels
       invoke :setup_database
       invoke :configure_app
       invoke :setup_stylesheets
-      invoke :customize_error_pages
       invoke :remove_routes_comment_lines
       invoke :remove_turbolinks
       invoke :setup_git
@@ -128,11 +127,6 @@ module Bretels
       build :init_git
     end
 
-    def customize_error_pages
-      say 'Customizing the 500/404/422 pages'
-      build :customize_error_pages
-    end
-
     def remove_turbolinks
       build :remove_turbolinks
     end
@@ -142,9 +136,7 @@ module Bretels
     end
 
     def outro
-      say 'Done. Congratulations!'
-      say '1. Run rake db:create'
-      say "2. Update config/initializers/airbrake.rb"
+      say 'Done. Congratulations! Please run bin/setup to setup database!'
     end
 
     protected
@@ -152,6 +144,5 @@ module Bretels
     def get_builder_class
       Bretels::AppBuilder
     end
-
   end
 end
