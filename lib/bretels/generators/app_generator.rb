@@ -144,9 +144,8 @@ module Bretels
 
     def outro
       say 'Done. Congratulations!'
-      say '1. Run bundle install'
-      say '2. Run rake db:create'
-      say "3. Update config/initializers/airbrake.rb"
+      say '1. Run rake db:create'
+      say "2. Update config/initializers/airbrake.rb"
     end
 
     protected
