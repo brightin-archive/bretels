@@ -59,7 +59,6 @@ module Bretels
 
     def setup_production_environment
       say 'Setting up the production environment'
-      build :configure_smtp
       build :enable_force_ssl
       build :add_cdn_settings
       build :enable_rack_deflater
@@ -80,6 +79,7 @@ module Bretels
     def customize_gemfile
       build :replace_gemfile
       build :set_ruby_to_version_being_used
+      bundle_command 'install'
     end
 
     def setup_database
@@ -147,10 +147,6 @@ module Bretels
       say '1. Run bundle install'
       say '2. Run rake db:create'
       say "3. Update config/initializers/airbrake.rb"
-    end
-
-    def run_bundle
-      # Let's not: We'll bundle manually at the right spot
     end
 
     protected

@@ -45,30 +45,6 @@ module Bretels
         :after => "config.assets.digest = true"
     end
 
-    def configure_smtp
-      config = <<-RUBY
-\n\n  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'herokuapp.com',
-    :enable_starttls_auto => true
-  }
-  config.action_mailer.delivery_method = :smtp
-      RUBY
-
-      inject_into_file 'config/environments/production.rb', config.rstrip,
-        :after => 'config.action_mailer.raise_delivery_errors = false'
-
-      inject_into_file(
-        "config/environments/development.rb",
-        "\n\n  config.action_mailer.delivery_method = :letter_opener",
-        :before => "\nend"
-      )
-    end
-
     def enable_rack_deflater
       config = <<-RUBY
 
