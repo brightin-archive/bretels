@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.0'
+gem 'airbrake'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'pg'
@@ -8,15 +9,14 @@ gem 'rack-timeout'
 gem 'rails-i18n'
 gem 'sass-rails'
 gem 'uglifier'
-gem 'airbrake'
 
 group :development do
-  gem 'spring-commands-rspec'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'quiet_assets'
   gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :staging do
@@ -28,12 +28,7 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
-group :test do
-  gem 'launchy'
-end
-
 group :staging, :production do
-  gem 'newrelic_rpm'
   gem 'rack-zippy'
   gem 'rails_12factor'
   gem 'unicorn'
