@@ -2,6 +2,7 @@
 *.swp
 .bundle
 .rake_tasks
+Gemfile.lock
 /bin/*
 !bin/bretels
 pkg
