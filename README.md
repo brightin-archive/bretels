@@ -15,7 +15,7 @@ Then run:
 
     bretels projectname
 
-This will create a Rails 3.2 app in `projectname`. This script creates a
+This will create a Rails 4.2 app in `projectname`. This script creates a
 new git repository. It is not meant to be used against an existing repo.
 
 Dependencies
