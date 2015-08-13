@@ -24,7 +24,7 @@ module Bretels
       invoke :setup_test_environment
       invoke :setup_production_environment
       invoke :setup_staging_environment
-      invoke :create_suspenders_views
+      invoke :create_views
       invoke :setup_database
       invoke :configure_app
       invoke :setup_stylesheets
@@ -68,7 +68,7 @@ module Bretels
       build :setup_staging_environment
     end
 
-    def create_suspenders_views
+    def create_views
       say 'Creating bretel views'
       build :create_partials_directory
       build :create_shared_flashes

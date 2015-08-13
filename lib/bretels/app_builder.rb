@@ -93,7 +93,7 @@ module Bretels
     end
 
     def create_application_layout
-      template 'suspenders_layout.html.erb.erb',
+      template 'layout.html.erb.erb',
         'app/views/layouts/application.html.erb',
         :force => true
     end
@@ -175,7 +175,7 @@ module Bretels
     end
 
     def gitignore_files
-      concat_file 'suspenders_gitignore', '.gitignore'
+      concat_file 'gitignore', '.gitignore'
       [
         'spec/features',
         'spec/models',
