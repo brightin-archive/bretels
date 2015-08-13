@@ -31,8 +31,9 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'poltergeist'
+  gem 'simplecov', require: false
 end
 
 group :staging, :production do
