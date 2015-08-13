@@ -22,7 +22,7 @@ Dependencies
 ------------
 
 Some gems included have native extensions. You should have GCC
-installed on your machine before generating an app with Suspenders.
+installed on your machine before generating an app with Bretels.
 
 Use [OS X GCC Installer](https://github.com/kennethreitz/osx-gcc-installer/) for
 Snow Leopard (OS X 10.6).
@@ -30,9 +30,6 @@ Snow Leopard (OS X 10.6).
 Use [Command Line Tools for XCode](https://developer.apple.com/downloads/index.action)
 for Lion (OS X 10.7) or Mountain Lion (OS X 10.8).
 
-We use [Capybara Webkit](https://github.com/thoughtbot/capybara-webkit) for
-full-stack Javascript integration testing. It requires QT. Instructions for
-installing QT are
-[here](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit).
+We use [PhantomJS](http://phantomjs.org) for full-stack Javascript integration testing.
 
 PostgreSQL needs to be installed and running for the `db:create` rake task.
