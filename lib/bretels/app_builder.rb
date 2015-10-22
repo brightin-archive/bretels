@@ -38,9 +38,6 @@ module Bretels
 \n\n  # Cloudfront settings
   config.static_cache_control = "public, max-age=31536000"
   config.action_controller.asset_host = ENV['ASSET_HOST']
-
-  # Enable Rack Zippy for GZIP responses
-  config.middleware.swap(ActionDispatch::Static, Rack::Zippy::AssetServer)
       RUBY
 
       inject_into_file 'config/environments/production.rb', config.rstrip,
