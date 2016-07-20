@@ -42,7 +42,6 @@ module Bretels
     def setup_development_environment
       say 'Setting up the development environment'
       build :raise_delivery_errors
-      build :initialize_on_precompile
       build :lib_in_load_path
       build :install_spring_gem
     end
@@ -96,8 +95,6 @@ module Bretels
       build :configure_time_zone
       build :configure_time_formats
       build :configure_dutch_language
-      build :configure_rack_timeout
-      build :add_airbrake_configuration
       build :setup_foreman
     end
 

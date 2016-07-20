@@ -70,12 +70,6 @@ module Bretels
       template 'staging.rb.erb', 'config/environments/staging.rb'
     end
 
-    def initialize_on_precompile
-      inject_into_file 'config/application.rb',
-        "\n    config.assets.initialize_on_precompile = false",
-        :after => 'config.assets.enabled = true'
-    end
-
     def lib_in_load_path
       inject_into_file 'config/application.rb', "\n\n" + '    config.autoload_paths += Dir["#{config.root}/lib/**/"]',
         after: /class Application < Rails::Application/
@@ -129,23 +123,24 @@ module Bretels
     end
 
     def configure_time_zone
-      replace_in_file 'config/application.rb',
-        "# config.time_zone = 'Central Time (US & Canada)'",
-        "config.time_zone = 'Amsterdam'"
+      config = <<-RUBY
+  config.time_zone = 'Amsterdam'
+      RUBY
+
+      inject_into_class 'config/application.rb', 'Application', config
     end
 
     def configure_dutch_language
-      replace_in_file 'config/application.rb',
-        '# config.i18n.default_locale = :de',
-        "config.i18n.default_locale = :nl\n    config.i18n.available_locales = :nl"
+      config = <<-RUBY
+  config.i18n.default_locale = :nl
+  config.i18n.available_locales = :nl
+      RUBY
+
+      inject_into_class 'config/application.rb', 'Application', config
     end
 
     def configure_time_formats
       copy_file 'config_locales_nl.yml', 'config/locales/nl.yml'
-    end
-
-    def configure_rack_timeout
-      copy_file 'rack_timeout.rb', 'config/initializers/rack_timeout.rb'
     end
 
     def configure_action_mailer
@@ -161,7 +156,6 @@ module Bretels
     end
 
     def setup_foreman
-      copy_file 'puma.rb', 'config/puma.rb'
       copy_file 'Procfile', 'Procfile'
     end
 
@@ -199,10 +193,6 @@ module Bretels
       replace_in_file 'config/routes.rb',
         /Rails\.application\.routes\.draw do.*end/m,
         "Rails.application.routes.draw do\nend"
-    end
-
-    def add_airbrake_configuration
-      copy_file 'airbrake.rb', 'config/initializers/airbrake.rb'
     end
 
     def raise_unpermitted_params
