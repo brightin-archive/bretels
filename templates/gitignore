@@ -11,3 +11,4 @@ coverage/*
 public/system
 rerun.txt
 tags
+node_modules

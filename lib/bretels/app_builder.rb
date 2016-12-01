@@ -51,10 +51,19 @@ module Bretels
         :after => "config.serve_static_assets = false\n"
     end
 
-    def remove_turbolinks
-      replace_in_file 'app/assets/javascripts/application.js',
-        /\/\/= require turbolinks\n/,
-        ''
+    def replace_application_js
+      remove_file 'app/assets/javascripts/application.js'
+      create_file 'app/assets/javascripts/application.js', ''
+    end
+
+    def generate_package_json
+      template 'package.json.erb', 'package.json',
+        :force => true
+    end
+
+    def copy_browserify_files
+      copy_file 'browserify_initializer.rb', 'config/initializers/browserify.rb'
+      copy_file '.babelrc', '.babelrc'
     end
 
     def enable_force_ssl

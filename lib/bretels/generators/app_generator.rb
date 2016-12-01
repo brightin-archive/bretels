@@ -28,7 +28,7 @@ module Bretels
       invoke :configure_app
       invoke :setup_stylesheets
       invoke :remove_routes_comment_lines
-      invoke :remove_turbolinks
+      invoke :setup_javascript
       invoke :setup_git
       invoke :create_heroku_apps
       invoke :outro
@@ -117,8 +117,10 @@ module Bretels
       build :init_git
     end
 
-    def remove_turbolinks
-      build :remove_turbolinks
+    def setup_javascript
+      build :replace_application_js
+      build :generate_package_json
+      build :copy_browserify_files
     end
 
     def remove_routes_comment_lines
