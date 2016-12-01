@@ -1,7 +1,12 @@
 require 'spec_helper'
+require 'ostruct'
+require 'mail_interceptor'
 
 RSpec.describe MailInterceptor do
-  subject { described_class.new(['john@example.com', 'eric@example.com']) }
+  subject do
+    described_class.new(whitelist: ['john@example.com', 'eric@example.com'],
+                        fallback: 'terry@example.com')
+  end
 
   it 'is compatible with Mail interceptors' do
     expect(subject).to respond_to(:delivering_email)
@@ -15,8 +20,6 @@ RSpec.describe MailInterceptor do
   end
 
   it 'sends the email to a fallback address when no recipients remain' do
-    allow(ENV).to receive(:fetch).with('MAIL_INTERCEPTOR_FALLBACK')
-      .and_return('terry@example.com')
     email = OpenStruct.new(to: ['graham@example.com'])
     expect {
       subject.delivering_email(email)

@@ -11,6 +11,6 @@ class MailInterceptor
     mail.to = mail.to.select do |recipient|
       @whitelist.include?(recipient)
     end
-    mail.to = [@fallback] if @fallback && mail.to.blank?
+    mail.to = [@fallback] if @fallback && mail.to.empty?
   end
 end
