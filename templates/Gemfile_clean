@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.0'
 gem 'browserify-rails'
 gem 'pg'
 gem 'puma'
+gem 'rails', '~> 5.0.0'
 gem 'rails-i18n'
 gem 'sass-rails'
 gem 'uglifier'
@@ -20,8 +20,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'rspec-rails'
 end
 
 group :test do
