@@ -156,7 +156,7 @@ module Bretels
 
     def setup_stylesheets
       copy_file 'app/assets/stylesheets/application.css',
-        'app/assets/stylesheets/application.css.scss'
+        'app/assets/stylesheets/application.sass'
       remove_file 'app/assets/stylesheets/application.css'
     end
 
