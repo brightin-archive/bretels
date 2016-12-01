@@ -21,6 +21,10 @@ module Bretels
       empty_directory 'spec/factories'
     end
 
+    def add_factory_girl_lint_task
+      copy_file 'factory_girl.rake', 'lib/tasks/factory_girl.rake'
+    end
+
     def install_spring_gem
       `gem install spring spring-commands-rspec`
     end

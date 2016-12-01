@@ -46,6 +46,7 @@ module Bretels
       build :generate_rspec
       build :configure_rspec
       build :generate_factories_file
+      build :add_factory_girl_lint_task
     end
 
     def setup_production_environment
