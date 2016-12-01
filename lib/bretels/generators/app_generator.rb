@@ -23,7 +23,6 @@ module Bretels
       invoke :setup_development_environment
       invoke :setup_test_environment
       invoke :setup_production_environment
-      invoke :setup_staging_environment
       invoke :create_views
       invoke :setup_database
       invoke :configure_app
@@ -60,11 +59,6 @@ module Bretels
       build :enable_force_ssl
       build :add_cdn_settings
       build :enable_rack_deflater
-    end
-
-    def setup_staging_environment
-      say 'Setting up the staging environment'
-      build :setup_staging_environment
     end
 
     def create_views

@@ -66,10 +66,6 @@ module Bretels
         '# config.force_ssl = true', 'config.force_ssl = true'
     end
 
-    def setup_staging_environment
-      template 'staging.rb.erb', 'config/environments/staging.rb'
-    end
-
     def lib_in_load_path
       inject_into_file 'config/application.rb', "\n\n" + '    config.autoload_paths += Dir["#{config.root}/lib/**/"]',
         after: /class Application < Rails::Application/
@@ -146,7 +142,6 @@ module Bretels
     def configure_action_mailer
       action_mailer_host 'development', "#{app_name}.dev"
       action_mailer_host 'test', 'www.example.com'
-      action_mailer_host 'staging', "#{app_name}-staging.herokuapp.com"
       action_mailer_host 'production', "#{app_name}.nl"
     end
 
@@ -186,7 +181,6 @@ module Bretels
     def create_heroku_apps
       run "#{path_addition} heroku create #{app_name}-production --remote=production"
       run "#{path_addition} heroku create #{app_name}-staging --remote=staging"
-      run "#{path_addition} heroku config:add RACK_ENV=staging RAILS_ENV=staging --remote=staging"
     end
 
     def remove_routes_comment_lines
