@@ -18,7 +18,6 @@ module Bretels
     end
 
     def bretels_customization
-      invoke :remove_files_we_dont_need
       invoke :customize_gemfile
       invoke :setup_development_environment
       invoke :setup_test_environment
@@ -32,10 +31,6 @@ module Bretels
       invoke :setup_git
       invoke :create_heroku_apps
       invoke :outro
-    end
-
-    def remove_files_we_dont_need
-      build :remove_rails_logo_image
     end
 
     def setup_development_environment
