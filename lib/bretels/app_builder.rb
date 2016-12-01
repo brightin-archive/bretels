@@ -21,10 +21,6 @@ module Bretels
       copy_file 'poltergeist.rb', 'spec/support/poltergeist.rb'
     end
 
-    def test_factories_first
-      copy_file 'factories_spec.rb', 'spec/models/factories_spec.rb'
-    end
-
     def generate_factories_file
       empty_directory 'spec/factories'
     end
