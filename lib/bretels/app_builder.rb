@@ -166,7 +166,7 @@ module Bretels
     end
 
     def gitignore_files
-      concat_file 'gitignore', '.gitignore'
+      concat_file 'gitignore_extras', '.gitignore'
       [
         'spec/features',
         'spec/models',
