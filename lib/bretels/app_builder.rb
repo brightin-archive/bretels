@@ -143,6 +143,10 @@ module Bretels
       action_mailer_host 'development', "#{app_name}.dev"
       action_mailer_host 'test', 'www.example.com'
       action_mailer_host 'production', "#{app_name}.nl"
+      template 'mail_interceptor.rb', 'lib/mail_interceptor.rb'
+      template 'mail_interceptor_spec.rb', 'spec/lib/mail_interceptor_spec.rb'
+      template 'mail_interceptor_initializer.rb',
+        'config/initializers/mail_interceptor.rb'
     end
 
     def generate_rspec
