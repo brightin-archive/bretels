@@ -179,8 +179,6 @@ module Bretels
 
     def init_git
       run 'git init'
-      run 'git add .'
-      run 'git commit -m "Initial commit" > /dev/null'
     end
 
     def create_heroku_apps
