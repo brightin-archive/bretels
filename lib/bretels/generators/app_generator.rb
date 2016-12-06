@@ -9,8 +9,8 @@ module Bretels
     class_option :heroku, :type => :boolean, :aliases => '-H', :default => false,
       :desc => 'Create staging and production Heroku apps'
 
-    class_option :skip_test_unit, :type => :boolean, :aliases => '-T', :default => true,
-      :desc => 'Skip Test::Unit files'
+    class_option :skip_test, :type => :boolean, :aliases => '-T', :default => true,
+      :desc => 'Skip test files'
 
     def finish_template
       invoke :bretels_customization
@@ -18,25 +18,19 @@ module Bretels
     end
 
     def bretels_customization
-      invoke :remove_files_we_dont_need
       invoke :customize_gemfile
       invoke :setup_development_environment
       invoke :setup_test_environment
       invoke :setup_production_environment
-      invoke :setup_staging_environment
       invoke :create_views
       invoke :setup_database
       invoke :configure_app
       invoke :setup_stylesheets
       invoke :remove_routes_comment_lines
-      invoke :remove_turbolinks
+      invoke :setup_javascript
       invoke :setup_git
       invoke :create_heroku_apps
       invoke :outro
-    end
-
-    def remove_files_we_dont_need
-      build :remove_rails_logo_image
     end
 
     def setup_development_environment
@@ -49,10 +43,10 @@ module Bretels
     def setup_test_environment
       say 'Setting up the test environment'
       build :add_support_files
-      build :test_factories_first
       build :generate_rspec
       build :configure_rspec
       build :generate_factories_file
+      build :add_factory_girl_lint_task
     end
 
     def setup_production_environment
@@ -60,11 +54,6 @@ module Bretels
       build :enable_force_ssl
       build :add_cdn_settings
       build :enable_rack_deflater
-    end
-
-    def setup_staging_environment
-      say 'Setting up the staging environment'
-      build :setup_staging_environment
     end
 
     def create_views
@@ -124,8 +113,10 @@ module Bretels
       build :init_git
     end
 
-    def remove_turbolinks
-      build :remove_turbolinks
+    def setup_javascript
+      build :replace_application_js
+      build :generate_package_json
+      build :copy_browserify_files
     end
 
     def remove_routes_comment_lines

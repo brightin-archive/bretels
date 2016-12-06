@@ -1,5 +1,0 @@
-load "config/environments/production.rb"
-
-Rails.application.configure do
-  Mail.register_interceptor RecipientInterceptor.new(ENV['EMAIL_RECEIVERS'])
-end

@@ -6,10 +6,6 @@ module Bretels
       template 'README.md.erb', 'README.md'
     end
 
-    def remove_rails_logo_image
-      remove_file 'app/assets/images/rails.png'
-    end
-
     def raise_delivery_errors
       replace_in_file 'config/environments/development.rb',
         'raise_delivery_errors = false', 'raise_delivery_errors = true'
@@ -21,12 +17,12 @@ module Bretels
       copy_file 'poltergeist.rb', 'spec/support/poltergeist.rb'
     end
 
-    def test_factories_first
-      copy_file 'factories_spec.rb', 'spec/models/factories_spec.rb'
-    end
-
     def generate_factories_file
       empty_directory 'spec/factories'
+    end
+
+    def add_factory_girl_lint_task
+      copy_file 'factory_girl.rake', 'lib/tasks/factory_girl.rake'
     end
 
     def install_spring_gem
@@ -55,19 +51,24 @@ module Bretels
         :after => "config.serve_static_assets = false\n"
     end
 
-    def remove_turbolinks
-      replace_in_file 'app/assets/javascripts/application.js',
-        /\/\/= require turbolinks\n/,
-        ''
+    def replace_application_js
+      remove_file 'app/assets/javascripts/application.js'
+      create_file 'app/assets/javascripts/application.js', ''
+    end
+
+    def generate_package_json
+      template 'package.json.erb', 'package.json',
+        :force => true
+    end
+
+    def copy_browserify_files
+      copy_file 'browserify_initializer.rb', 'config/initializers/browserify.rb'
+      copy_file '.babelrc', '.babelrc'
     end
 
     def enable_force_ssl
       replace_in_file 'config/environments/production.rb',
         '# config.force_ssl = true', 'config.force_ssl = true'
-    end
-
-    def setup_staging_environment
-      template 'staging.rb.erb', 'config/environments/staging.rb'
     end
 
     def lib_in_load_path
@@ -146,8 +147,11 @@ module Bretels
     def configure_action_mailer
       action_mailer_host 'development', "#{app_name}.dev"
       action_mailer_host 'test', 'www.example.com'
-      action_mailer_host 'staging', "#{app_name}-staging.herokuapp.com"
       action_mailer_host 'production', "#{app_name}.nl"
+      template 'mail_interceptor.rb', 'lib/mail_interceptor.rb'
+      template 'mail_interceptor_spec.rb', 'spec/lib/mail_interceptor_spec.rb'
+      template 'mail_interceptor_initializer.rb',
+        'config/initializers/mail_interceptor.rb'
     end
 
     def generate_rspec
@@ -161,12 +165,12 @@ module Bretels
 
     def setup_stylesheets
       copy_file 'app/assets/stylesheets/application.css',
-        'app/assets/stylesheets/application.css.scss'
+        'app/assets/stylesheets/application.scss'
       remove_file 'app/assets/stylesheets/application.css'
     end
 
     def gitignore_files
-      concat_file 'gitignore', '.gitignore'
+      concat_file 'gitignore_extras', '.gitignore'
       [
         'spec/features',
         'spec/models',
@@ -184,7 +188,6 @@ module Bretels
     def create_heroku_apps
       run "#{path_addition} heroku create #{app_name}-production --remote=production"
       run "#{path_addition} heroku create #{app_name}-staging --remote=staging"
-      run "#{path_addition} heroku config:add RACK_ENV=staging RAILS_ENV=staging --remote=staging"
     end
 
     def remove_routes_comment_lines

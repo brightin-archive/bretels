@@ -1,7 +1,5 @@
-/.bundle
-/db/*.sqlite3
-/log/*.log
-/tmp
+
+# Ignored by Bretels
 .sass-cache
 !.keep
 *.DS_Store
@@ -11,3 +9,4 @@ coverage/*
 public/system
 rerun.txt
 tags
+node_modules
